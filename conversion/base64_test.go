@@ -1,6 +1,9 @@
 package conversion
 
-import "testing"
+import (
+	"encoding/base64"
+	"testing"
+)
 
 func TestBase64Encode(t *testing.T) {
 	testCases := []struct {
@@ -16,6 +19,10 @@ func TestBase64Encode(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
+		sr := base64.StdEncoding.EncodeToString([]byte(tc.in))
+		if sr != tc.expected {
+			t.Errorf("bad case %s != %s", sr, tc.expected)
+		}
 		result := Base64Encode([]byte(tc.in))
 		if result != tc.expected {
 			t.Fatalf("Base64Encode(%s) = %s, want %s", tc.in, result, tc.expected)

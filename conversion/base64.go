@@ -26,6 +26,7 @@ func Base64Encode(input []byte) string {
 		padding += "="
 	}
 
+	// 除以3，乘以4；唔够3，补齐4.
 	// encode 24 bits per 24 bits (3 bytes per 3 bytes)
 	for i := 0; i < len(input); i += 3 {
 		// select 3 8-bit input groups, and re-arrange them into 4 6-bit groups
